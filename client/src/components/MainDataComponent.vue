@@ -1,20 +1,11 @@
 <template>
   <div id="main">
-    <div id="navbar" style="width: 100vw;">
-      <div id='cssmenu'>
-        <ul>
-          <li class='active'><a href='#'>Home</a></li>
-          <li><a href='#'>Products</a></li>
-          <li><a href='#'>Contact</a></li>
-          <li><a href='#'>About</a></li>
-        </ul>
-      </div>
-    </div>
+
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
     <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
     <input id="autoComplete" tabindex="1" style="width: 35vw; right: 10.5vw; top: 33vh;">
-    <!-- Default "id" value = "autoComplete"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <infection-scroll-bar :scroll-info="countryObj" :parentData="country" v-on:childToParent="onChildClick"
                           style="position:absolute; left:2vw;"
                           countries-data="222"></infection-scroll-bar>
@@ -36,6 +27,10 @@
 
     <line-chart :chart-data="datacollection" options="responsive: true" id="worldData"></line-chart>
     <div id="regions_div" style="width: 700px; height: 300px;"></div>
+    <a href="#" class="fa fa-facebook"></a>
+    <a href="#" class="fa fa-instagram"></a>
+    <a href="#" class="fa fa-linkedin"></a>
+
   </div>
 </template>
 
@@ -43,14 +38,12 @@
   import LineChart from './Chart.js'
   import CountryService from "../services/CountryService";
   import autoComplete from '@tarekraafat/autocomplete.js'
-  import NavbarComponent from "./NavbarComponent";
   import BarChart from './BarChart.js'
   import InfectionScrollBar from './InfectionScrollBar';
   import {GoogleCharts} from 'google-charts';
 
   export default {
     components: {
-      NavbarComponent,
       LineChart,
       BarChart,
       InfectionScrollBar,
@@ -257,7 +250,7 @@
           chart.draw(data, options);
 
         }
-      }
+      },
     }
   }
 </script>
@@ -338,119 +331,35 @@
     font-size: 30px;
     margin-right: 20vw;
   }
-
-  @import url(http://fonts.googleapis.com/css?family=Raleway);
-  #cssmenu,
-  #cssmenu ul,
-  #cssmenu ul li,
-  #cssmenu ul li a {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    list-style: none;
-    line-height: 1;
-    display: block;
-    position: relative;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+  .fa {
+    padding: 7px;
+    width: 30px;
   }
 
-  #cssmenu {
+  .fa:hover {
+    opacity: 0.7;
   }
-
-  #cssmenu:after,
-  #cssmenu > ul:after {
-    content: ".";
-    display: block;
-    clear: both;
-    visibility: hidden;
-    line-height: 0;
-    height: 0;
-  }
-
-  #cssmenu {
-    width: auto;
-    border-bottom: 3px solid #47c9af;
-    font-family: Raleway, sans-serif;
-    line-height: 1;
-  }
-
-  #cssmenu ul {
-    background: #ffffff;
-  }
-
-  #cssmenu > ul > li {
-    float: left;
-  }
-
-  #cssmenu.align-center > ul {
-    font-size: 0;
-    text-align: center;
-  }
-
-  #cssmenu.align-center > ul > li {
-    display: inline-block;
-    float: none;
-  }
-
-  #cssmenu.align-right > ul > li {
-    float: right;
-  }
-
-  #cssmenu.align-right > ul > li > a {
-    margin-right: 0;
-    margin-left: -4px;
-  }
-
-  #cssmenu > ul > li > a {
-    z-index: 2;
-    padding: 18px 25px 12px 25px;
-    font-size: 15px;
-    font-weight: 400;
-    text-decoration: none;
-    color: #444444;
-    -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    -ms-transition: all .2s ease;
-    -o-transition: all .2s ease;
-    transition: all .2s ease;
-    margin-right: -4px;
-  }
-
-  #cssmenu > ul > li.active > a,
-  #cssmenu > ul > li:hover > a,
-  #cssmenu > ul > li > a:hover {
-    color: #ffffff;
-  }
-
-  #cssmenu > ul > li > a:after {
+  .fa-facebook {
+    background: #3B5998;
+    color: white;
     position: absolute;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: -1;
-    width: 100%;
-    height: 120%;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    content: "";
-    -webkit-transition: all .2s ease;
-    -o-transition: all .2s ease;
-    transition: all .2s ease;
-    -webkit-transform: perspective(5px) rotateX(2deg);
-    -webkit-transform-origin: bottom;
-    -moz-transform: perspective(5px) rotateX(2deg);
-    -moz-transform-origin: bottom;
-    transform: perspective(5px) rotateX(2deg);
-    transform-origin: bottom;
+    bottom: 3vh;
+    left: 30vw;
   }
+  .fa-instagram {
+    background: #125688;
+    color: white;
+    position: absolute;
+    bottom: 3vh;
+    left: 20vw;
 
-  #cssmenu > ul > li.active > a:after,
-  #cssmenu > ul > li:hover > a:after,
-  #cssmenu > ul > li > a:hover:after {
-    background: #47c9af;
   }
-
+  .fa-linkedin {
+    background: #007bb5;
+    color: white;
+    position:absolute;
+    bottom: 3vh;
+    left: 25vw;
+  }
 
 </style>
