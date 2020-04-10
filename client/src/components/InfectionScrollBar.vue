@@ -73,8 +73,8 @@
 <style>
   #countries {
     overflow-y: scroll;
-    height: 50vh;
-    width: 13vw;
+    height: 76vh;
+    width: 12vw;
   }
 
   .country {

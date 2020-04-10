@@ -1,14 +1,24 @@
 <template>
   <div id="main">
-    <navbar-component id="navbar"/>
+    <div id="navbar" style="width: 100vw;">
+      <div id='cssmenu'>
+        <ul>
+          <li class='active'><a href='#'>Home</a></li>
+          <li><a href='#'>Products</a></li>
+          <li><a href='#'>Contact</a></li>
+          <li><a href='#'>About</a></li>
+        </ul>
+      </div>
+    </div>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
     <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
     <input id="autoComplete" tabindex="1" style="width: 35vw; right: 10.5vw; top: 33vh;">
     <!-- Default "id" value = "autoComplete"> -->
-    <infection-scroll-bar :scroll-info="countryObj" :parentData="country" v-on:childToParent="onChildClick" style="position:absolute; left:0;"
+    <infection-scroll-bar :scroll-info="countryObj" :parentData="country" v-on:childToParent="onChildClick"
+                          style="position:absolute; left:2vw;"
                           countries-data="222"></infection-scroll-bar>
-    <div>{{country}}</div>
+    <div id='currentCountry'>{{country}}</div>
     <div class="numericalDataWrapper" style="margin-top: -10vh">
       <div class="I">
         <div class="infected">Number of infected people:</div>
@@ -25,25 +35,26 @@
     </div>
 
     <line-chart :chart-data="datacollection" options="responsive: true" id="worldData"></line-chart>
+    <div id="regions_div" style="width: 700px; height: 300px;"></div>
   </div>
 </template>
 
 <script>
-
-
   import LineChart from './Chart.js'
   import CountryService from "../services/CountryService";
   import autoComplete from '@tarekraafat/autocomplete.js'
   import NavbarComponent from "./NavbarComponent";
   import BarChart from './BarChart.js'
   import InfectionScrollBar from './InfectionScrollBar';
+  import {GoogleCharts} from 'google-charts';
 
   export default {
     components: {
       NavbarComponent,
       LineChart,
       BarChart,
-      InfectionScrollBar
+      InfectionScrollBar,
+      GoogleCharts
     },
     data() {
       return {
@@ -54,15 +65,15 @@
         countries: [],
         country: 'All',
         countryData: {},
-        countryObj: {} // used for fixing offset
+        countryObj: {}, // used for fixing offset
+        mapData: [['Country', 'Popularity']] // 2D array of the form [['Country', 'Number']]
       }
     },
     async mounted() {
       await this.fillData();
-      let autoComplete = document.createElement('script');
-      autoComplete.setAttribute('src', 'https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js');
-      document.head.appendChild(autoComplete);
+
       this.AutoComplete();
+      this.loadMap();
     },
     methods: {
       async fillData() {
@@ -146,7 +157,12 @@
 
         }
         this.countryData = currentView;
-        console.log(this.countryData);
+        let k = Object.keys(formatted);
+        let v = Object.values(formatted);
+        for (let j = 0; j < k.length; j++) {
+          this.mapData.push([k[j], v[j]]);
+        }
+        console.log('This map data is: ', this.mapData);
         InfectionScrollBar.methods.updateCountryData(formatted);
       },
       AutoComplete() {
@@ -220,6 +236,27 @@
             }
           ]
         }
+      },
+      loadMap() {
+        GoogleCharts.load(drawRegionsMap, {
+          'packages': ['geochart'],
+          'mapsApiKey': 'AIzaSyBYE0h2H2ywXhQQuMeyC_8Ms26PfF_JtEI'
+        });
+        let d = this.mapData;
+
+        function drawRegionsMap() {
+          let data = GoogleCharts.api.visualization.arrayToDataTable(d);
+
+          let options = {
+            colorAxis: {colors: ['#dd755f', '#FF0000']},
+          };
+
+          let chart = new GoogleCharts.api.visualization.GeoChart(document.getElementById('regions_div'));
+
+
+          chart.draw(data, options);
+
+        }
       }
     }
   }
@@ -287,6 +324,133 @@
     top: 2vh;
     position: absolute;
     width: 70vw;
+    /*left: 10vw;*/
   }
+
+  #regions_div {
+    position: absolute;
+    top: 55vh;
+    left: 20vw;
+  }
+
+  #currentCountry {
+    font-family: 'Kalam';
+    font-size: 30px;
+    margin-right: 20vw;
+  }
+
+  @import url(http://fonts.googleapis.com/css?family=Raleway);
+  #cssmenu,
+  #cssmenu ul,
+  #cssmenu ul li,
+  #cssmenu ul li a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    line-height: 1;
+    display: block;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  #cssmenu {
+  }
+
+  #cssmenu:after,
+  #cssmenu > ul:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+  }
+
+  #cssmenu {
+    width: auto;
+    border-bottom: 3px solid #47c9af;
+    font-family: Raleway, sans-serif;
+    line-height: 1;
+  }
+
+  #cssmenu ul {
+    background: #ffffff;
+  }
+
+  #cssmenu > ul > li {
+    float: left;
+  }
+
+  #cssmenu.align-center > ul {
+    font-size: 0;
+    text-align: center;
+  }
+
+  #cssmenu.align-center > ul > li {
+    display: inline-block;
+    float: none;
+  }
+
+  #cssmenu.align-right > ul > li {
+    float: right;
+  }
+
+  #cssmenu.align-right > ul > li > a {
+    margin-right: 0;
+    margin-left: -4px;
+  }
+
+  #cssmenu > ul > li > a {
+    z-index: 2;
+    padding: 18px 25px 12px 25px;
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration: none;
+    color: #444444;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+    margin-right: -4px;
+  }
+
+  #cssmenu > ul > li.active > a,
+  #cssmenu > ul > li:hover > a,
+  #cssmenu > ul > li > a:hover {
+    color: #ffffff;
+  }
+
+  #cssmenu > ul > li > a:after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    width: 100%;
+    height: 120%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    content: "";
+    -webkit-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+    -webkit-transform: perspective(5px) rotateX(2deg);
+    -webkit-transform-origin: bottom;
+    -moz-transform: perspective(5px) rotateX(2deg);
+    -moz-transform-origin: bottom;
+    transform: perspective(5px) rotateX(2deg);
+    transform-origin: bottom;
+  }
+
+  #cssmenu > ul > li.active > a:after,
+  #cssmenu > ul > li:hover > a:after,
+  #cssmenu > ul > li > a:hover:after {
+    background: #47c9af;
+  }
+
 
 </style>
