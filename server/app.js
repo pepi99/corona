@@ -25,7 +25,10 @@ db.once('open', function () {
 db.on('error', function (error) {
     console.log('DB Error: ', error);
 });
-app.use('/', serveStatic(path.join(__dirname, '../client/dist')));
+app.use('/', express.static(path.join(__dirname, '../client/dist')));
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/dist/index.html'));
+})
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/countries', countries);
 app.use('/api', api);
