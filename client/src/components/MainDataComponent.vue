@@ -26,7 +26,7 @@
     </div>
 
     <line-chart :chart-data="datacollection" options="responsive: true" id="worldData"></line-chart>
-    <div id="regions_div" style="width: 700px; height: 300px;"></div>
+    <div id="regions_div" style="width: 40vw; height: 30vh;"></div>
     <a href="#" class="fa fa-facebook"></a>
     <a href="#" class="fa fa-instagram"></a>
     <a href="#" class="fa fa-linkedin"></a>
@@ -59,7 +59,7 @@
         country: 'All',
         countryData: {},
         countryObj: {}, // used for fixing offset
-        mapData: [['Country', 'Popularity']] // 2D array of the form [['Country', 'Number']]
+        mapData: [['Country', 'Infections']] // 2D array of the form [['Country', 'Number']]
       }
     },
     async mounted() {
@@ -331,6 +331,7 @@
     font-size: 30px;
     margin-right: 20vw;
   }
+
   .fa {
     padding: 7px;
     width: 30px;
@@ -339,6 +340,7 @@
   .fa:hover {
     opacity: 0.7;
   }
+
   .fa-facebook {
     background: #3B5998;
     color: white;
@@ -346,6 +348,7 @@
     bottom: 3vh;
     left: 30vw;
   }
+
   .fa-instagram {
     background: #125688;
     color: white;
@@ -354,10 +357,11 @@
     left: 20vw;
 
   }
+
   .fa-linkedin {
     background: #007bb5;
     color: white;
-    position:absolute;
+    position: absolute;
     bottom: 3vh;
     left: 25vw;
   }
