@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2990f305-42a1-4797-bd40-86419c7fc8f6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MainDataComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainDataComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/node_modules/serve-static/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/node_modules/serve-static/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +30,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.14.1" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../vue-material-dashboard" />
@@ -130,6 +134,7 @@
       <workItem from="1591434696585" duration="235000" />
       <workItem from="1591625320607" duration="19000" />
       <workItem from="1592292343093" duration="715000" />
+      <workItem from="1592299077494" duration="2579000" />
     </task>
     <servers />
   </component>

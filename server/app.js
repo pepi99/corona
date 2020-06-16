@@ -6,6 +6,8 @@ const config = require('./config/database');
 const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
+const serveStatic = require('serve-static');
+
 
 let countries = require('./routes/countries');
 let api = require('./routes/api');
@@ -23,7 +25,7 @@ db.once('open', function () {
 db.on('error', function (error) {
     console.log('DB Error: ', error);
 });
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', serveStatic(path.join(__dirname, '../client/dist')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/countries', countries);
 app.use('/api', api);
