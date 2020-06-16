@@ -1,4 +1,3 @@
 module.exports = {
-    database: 'mongodb://localhost:27017/db',
-    secret: 'yoursecret'
+    database: 'mongodb+srv://dbcUser:dbcPassword@cluster0-gpm70.mongodb.net/dbc?retryWrites=true&w=majority',
 };
